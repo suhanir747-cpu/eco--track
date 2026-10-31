@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Global Warming Tracking | Digital Climate Intelligence</title>
+
+<style>
+
+/* =========================
+   GLOBAL SETTINGS
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#06171d;
+    color:white;
+    overflow-x:hidden;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 35px;
+
+    background:rgba(3,18,23,.94);
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(255,255,255,.1);
+
+    z-index:9999;
+}
+
+.logo{
+    font-size:21px;
+    font-weight:bold;
+    color:#68e0a0;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:white;
+}
+
+.nav{
+    display:flex;
+    gap:18px;
+    align-items:center;
+}
+
+.nav a{
+    font-size:12px;
+    color:#bdd0d1;
+    transition:.3s;
+}
+
+.nav a:hover{
+    color:#68e0a0;
+}
+
+.live{
+    padding:9px 14px;
+    border-radius:20px;
+    background:#d94343;
+    font-size:11px;
+    font-weight:bold;
+}
+
+
+/* =========================
+   PAGE COMMON
+========================= */
+
+.page{
+    min-height:100vh;
+    padding:125px 7% 80px;
+    position:relative;
+}
+
+.page-title{
+    max-width:850px;
+    margin-bottom:45px;
+}
+
+.tag{
+    color:#68e0a0;
+    font-size:12px;
+    letter-spacing:2px;
+    margin-bottom:14px;
+}
+
+.page-title h1{
+    font-size:clamp(42px,6vw,75px);
+    line-height:1;
+    margin-bottom:20px;
+}
+
+.page-title h1 span{
+    color:#68e0a0;
+}
+
+.page-title p{
+    color:#a9bfc1;
+    line-height:1.8;
+    font-size:17px;
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+.home{
+    min-height:100vh;
+    padding:150px 7% 80px;
+
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:60px;
+    align-items:center;
+
+    background:
+    linear-gradient(90deg,
+    rgba(2,17,22,.98),
+    rgba(2,17,22,.55)),
+    url("https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?auto=format&fit=crop&w=2000&q=85");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.home h1{
+    font-size:clamp(50px,7vw,90px);
+    line-height:.95;
+}
+
+.home h1 span{
+    color:#68e0a0;
+}
+
+.subtitle{
+    color:#b9cdcf;
+    font-size:18px;
+    line-height:1.8;
+    margin-top:25px;
+    max-width:700px;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-top:35px;
+}
+
+.btn{
+    padding:14px 22px;
+    border-radius:8px;
+    border:1px solid rgba(255,255,255,.2);
+    transition:.3s;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+}
+
+.green{
+    background:#68e0a0;
+    color:#062018;
+}
+
+
+/* =========================
+   TRACKING DASHBOARD
+========================= */
+
+.monitor{
+    background:rgba(5,27,33,.88);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:22px;
+    padding:25px;
+    backdrop-filter:blur(15px);
+    box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+
+.monitor-head{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.online{
+    color:#68e0a0;
+    font-size:11px;
+}
+
+.big-number{
+    font-size:65px;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+.big-number span{
+    color:#68e0a0;
+}
+
+.chart{
+    height:180px;
+    display:flex;
+    align-items:flex-end;
+    gap:7px;
+    border-bottom:1px solid #385057;
+}
+
+.bar{
+    flex:1;
+    background:linear-gradient(to top,#68e0a0,#1b7354);
+    border-radius:5px 5px 0 0;
+}
+
+.monitor-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:20px;
+}
+
+.mini{
+    padding:14px;
+    background:rgba(255,255,255,.05);
+    border-radius:10px;
+}
+
+.mini small{
+    color:#91a8aa;
+}
+
+.mini b{
+    display:block;
+    color:#68e0a0;
+    margin-top:6px;
+}
+
+
+/* =========================
+   TRACKING CARDS
+========================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.card{
+    background:#0a252d;
+    border:1px solid rgba(255,255,255,.08);
+    padding:28px;
+    border-radius:18px;
+    transition:.35s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:#68e0a0;
+    box-shadow:0 15px 40px rgba(0,0,0,.3);
+}
+
+.card-icon{
+    font-size:34px;
+    margin-bottom:18px;
+}
+
+.card h2{
+    margin-bottom:12px;
+    font-size:22px;
+}
+
+.card p{
+    color:#9fb4b6;
+    line-height:1.65;
+    font-size:14px;
+}
+
+.data{
+    font-size:32px;
+    color:#68e0a0;
+    margin:18px 0;
+    font-weight:bold;
+}
+
+.status{
+    font-size:11px;
+    color:#68e0a0;
+}
+
+
+/* =========================
+   DATA TABLE
+========================= */
+
+.table-box{
+    overflow-x:auto;
+    background:#09232b;
+    border-radius:16px;
+    padding:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:18px;
+    text-align:left;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+th{
+    color:#68e0a0;
+}
+
+td{
+    color:#b8c9cb;
+}
+
+
+/* =========================
+   MAP
+========================= */
+
+.map{
+    min-height:430px;
+    border-radius:22px;
+    background:
+    linear-gradient(rgba(2,20,24,.35),rgba(2,20,24,.65)),
+    url("https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1600&q=80");
+
+    background-size:cover;
+    background-position:center;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.pin{
+    position:absolute;
+    width:18px;
+    height:18px;
+    background:#68e0a0;
+    border-radius:50%;
+    box-shadow:0 0 0 8px rgba(104,224,160,.15);
+    animation:pulse 2s infinite;
+}
+
+.pin1{left:25%;top:35%}
+.pin2{left:58%;top:28%}
+.pin3{left:72%;top:55%}
+.pin4{left:42%;top:65%}
+.pin5{left:80%;top:35%}
+
+@keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(104,224,160,.5)}
+    70%{box-shadow:0 0 0 18px rgba(104,224,160,0)}
+    100%{box-shadow:0 0 0 0 rgba(104,224,160,0)}
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress{
+    height:12px;
+    background:#18363d;
+    border-radius:20px;
+    overflow:hidden;
+    margin:15px 0 25px;
+}
+
+.progress span{
+    display:block;
+    height:100%;
+    background:#68e0a0;
+}
+
+
+/* =========================
+   IMAGE SECTION
+========================= */
+
+.visual{
+    width:100%;
+    height:430px;
+    border-radius:22px;
+    object-fit:cover;
+    margin-bottom:30px;
+}
+
+
+/* =========================
+   TEAM
+========================= */
+
+.team{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.member{
+    text-align:center;
+    background:#0a252d;
+    padding:35px;
+    border-radius:20px;
+}
+
+.avatar{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    margin:0 auto 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:linear-gradient(135deg,#68e0a0,#126448);
+    color:#041914;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.member p{
+    color:#91a9ab;
+    margin-top:8px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#031015;
+    padding:40px 7%;
+    color:#81989a;
+    display:flex;
+    justify-content:space-between;
+}
+
+
+/* =========================
+   SIDE TRACKING MENU
+========================= */
+
+.side{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:999;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.side a{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+
+    background:#68e0a0;
+    color:#061b16;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-weight:bold;
+    font-size:13px;
+
+    transition:.3s;
+}
+
+.side a:hover{
+    transform:scale(1.15);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+
+    .home{
+        grid-template-columns:1fr;
+    }
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .team{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .nav{
+        display:none;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .monitor-grid{
+        grid-template-columns:1fr;
+    }
+
+    footer{
+        flex-direction:column;
+        gap:15px;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<header class="navbar">
+
+<div class="logo">
+    ECO<span>TRACK</span>
+</div>
+
+<nav class="nav">
+
+<a href="#home">HOME</a>
+<a href="#dashboard">DASHBOARD</a>
+<a href="#temperature">TEMPERATURE</a>
+<a href="#carbon">CO₂</a>
+<a href="#satellite">SATELLITE</a>
+<a href="#ai">AI</a>
+<a href="#solutions">SOLUTIONS</a>
+
+<div class="live">● LIVE</div>
+
+</nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     PAGE 1 — HOME
+===================================================== -->
+
+<section class="home" id="home">
+
+<div>
+
+<div class="tag">
+DIGITAL CLIMATE INTELLIGENCE SYSTEM
+</div>
+
+<h1>
+GLOBAL<br>
+<span>WARMING</span><br>
+TRACKING
+</h1>
+
+<p class="subtitle">
+A digital platform designed to explore how satellites,
+sensors, artificial intelligence and data analytics can
+help us monitor Earth's changing climate.
+</p>
+
+<div class="buttons">
+
+<a href="#dashboard" class="btn green">
+OPEN LIVE DASHBOARD →
+</a>
+
+<a href="#dashboard" class="btn">
+EXPLORE TRACKING
+</a>
+
+</div>
+
+</div>
+
+
+<div class="monitor">
+
+<div class="monitor-head">
+
+<b>GLOBAL CLIMATE MONITOR</b>
+
+<span class="online">● SYSTEM MONITORING</span>
+
+</div>
+
+<div class="big-number">
++1.5<span>°C</span>
+</div>
+
+<p style="color:#91a8aa">
+Illustrative temperature anomaly
+</p>
+
+<div class="chart">
+
+<div class="bar" style="height:35%"></div>
+<div class="bar" style="height:42%"></div>
+<div class="bar" style="height:49%"></div>
+<div class="bar" style="height:57%"></div>
+<div class="bar" style="height:64%"></div>
+<div class="bar" style="height:70%"></div>
+<div class="bar" style="height:79%"></div>
+<div class="bar" style="height:87%"></div>
+<div class="bar" style="height:94%"></div>
+
+</div>
+
+<div class="monitor-grid">
+
+<div class="mini">
+<small>CO₂</small>
+<b>420+ ppm</b>
+</div>
+
+<div class="mini">
+<small>SENSORS</small>
+<b>ACTIVE</b>
+</div>
+
+<div class="mini">
+<small>STATUS</small>
+<b>MONITORING</b>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 2 — DASHBOARD
+===================================================== -->
+
+<section class="page" id="dashboard">
+
+<div class="page-title">
+
+<div class="tag">01 / CLIMATE CONTROL CENTER</div>
+
+<h1>
+GLOBAL CLIMATE<br>
+<span>DASHBOARD</span>
+</h1>
+
+<p>
+A centralized digital dashboard can bring multiple climate
+indicators together so that changes can be observed,
+compared and analyzed.
+</p>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+<div class="card-icon">🌡️</div>
+<h2>Temperature</h2>
+<div class="data">+1.5°C</div>
+<p>Monitor changes in average temperature over time.</p>
+<span class="status">● TRACKING ACTIVE</span>
+</div>
+
+
+<div class="card">
+<div class="card-icon">💨</div>
+<h2>CO₂ Level</h2>
+<div class="data">420+ ppm</div>
+<p>Track atmospheric carbon dioxide concentration.</p>
+<span class="status">● DATA RECEIVED</span>
+</div>
+
+
+<div class="card">
+<div class="card-icon">🌊</div>
+<h2>Sea Level</h2>
+<div class="data">RISING</div>
+<p>Observe long-term changes in ocean levels.</p>
+<span class="status">● MONITORING</span>
+</div>
+
+
+<div class="card">
+<div class="card-icon">🧊</div>
+<h2>Ice Coverage</h2>
+<div class="data">DECLINING</div>
+<p>Track changes in glaciers and polar ice.</p>
+<span class="status">● SATELLITE DATA</span>
+</div>
+
+
+<div class="card">
+<div class="card-icon">🌳</div>
+<h2>Forest Cover</h2>
+<div class="data" style="opacity: 1;">TRACK</div>
+<p>Monitor forest loss and vegetation changes.</p>
+<span class="status">● REMOTE SENSING</span>
+</div>
+
+
+<div class="card">
+<div class="card-icon">🔥</div>
+<h2>Wildfires</h2>
+<div class="data">LIVE</div>
+<p>Satellite systems can identify active fire locations.</p>
+<span class="status">● ALERT SYSTEM</span>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 3 — TEMPERATURE TRACKER
+===================================================== -->
+
+<section class="page" id="temperature">
+
+<div class="page-title">
+
+<div class="tag">02 / TEMPERATURE MONITORING</div>
+
+<h1>
+GLOBAL<br>
+<span>TEMPERATURE TRACKER</span>
+</h1>
+
+<p>
+Temperature tracking helps researchers understand how
+Earth's climate is changing over years and decades.
+</p>
+
+</div>
+
+
+<div class="monitor">
+
+<h2>Temperature Trend</h2>
+
+<div class="chart" style="height:250px;margin-top:30px">
+
+<div class="bar" style="height:30%"></div>
+<div class="bar" style="height:34%"></div>
+<div class="bar" style="height:39%"></div>
+<div class="bar" style="height:45%"></div>
+<div class="bar" style="height:51%"></div>
+<div class="bar" style="height:58%"></div>
+<div class="bar" style="height:67%"></div>
+<div class="bar" style="height:78%"></div>
+<div class="bar" style="height:91%"></div>
+
+</div>
+
+<div class="buttons">
+
+<a href="#dashboard" class="btn green">ANALYZE TREND</a>
+<a href="#data" class="btn">VIEW DATA</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 4 — CO2 TRACKER
+===================================================== -->
+
+<section class="page" id="carbon">
+
+<div class="page-title">
+
+<div class="tag">03 / ATMOSPHERIC MONITORING</div>
+
+<h1>
+CO₂<br>
+<span>TRACKER</span>
+</h1>
+
+<p>
+Carbon dioxide is one of the major greenhouse gases.
+Digital monitoring systems can track its concentration
+and display changes over time.
+</p>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+<h2>Current Indicator</h2>
+<div class="data">420+ ppm</div>
+<div class="progress">
+<span style="width:85%"></span>
+</div>
+<p>Illustrative monitoring value.</p>
+</div>
+
+<div class="card">
+<h2>Atmospheric Sensors</h2>
+<div class="data">ACTIVE</div>
+<div class="progress">
+<span style="width:92%"></span>
+</div>
+<p>Connected environmental sensors.</p>
+</div>
+
+<div class="card">
+<h2>Data Processing</h2>
+<div class="data">98%</div>
+<div class="progress">
+<span style="width:98%"></span>
+</div>
+<p>Illustrative processing status.</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 5 — AIR QUALITY
+===================================================== -->
+
+<section class="page">
+
+<div class="page-title">
+
+<div class="tag">04 / ATMOSPHERIC HEALTH</div>
+
+<h1>
+AIR QUALITY<br>
+<span>MONITOR</span>
+</h1>
+
+<p>
+Digital air-quality stations can continuously collect
+information about pollutants and atmospheric conditions.
+</p>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+<div class="card-icon">🌫️</div>
+<h2>PM2.5</h2>
+<div class="data">MONITOR</div>
+<p>Fine particulate matter can be measured using air sensors.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">💨</div>
+<h2>Air Sensors</h2>
+<div class="data">ACTIVE</div>
+<p>Connected sensors provide environmental observations.</p>
+</div>
+
+<div class="card">
+<div class="card-icon">📊</div>
+<h2>Data Analysis</h2>
+<div class="data">LIVE</div>
+<p>Collected measurements can be transformed into dashboards.</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 6 — SEA LEVEL
+===================================================== -->
+
+<section class="page">
+
+<div class="page-title">
+
+<div class="tag">05 / OCEAN MONITORING</div>
+
+<h1>
+SEA LEVEL<br>
+<span>TRACKING</span>
+</h1>
+
+<p>
+Satellite observations and ocean instruments help scientists
+monitor changes in sea level and coastal environments.
+</p>
+
+</div>
+
+<div class="monitor">
+
+<div class="big-number">
+SEA <span>LEVEL</span>
+</div>
+
+<div class="progress">
+<span style="width:72%"></span>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h2>Satellite Altimetry</h2>
+<p>Measures ocean surface height from space.</p>
+</div>
+
+<div class="card">
+<h2>Coastal Sensors</h2>
+<p>Ground-based instruments monitor local changes.</p>
+</div>
+
+<div class="card">
+<h2>Trend Analysis</h2>
+<p>Long-term datasets reveal patterns.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 7 — GLACIER TRACKER
+===================================================== -->
+
+<section class="page">
+
+<div class="page-title">
+
+<div class="tag">06 / ICE MONITORING</div>
+
+<h1>
+GLACIER &amp; ICE<br>
+<span>TRACKER</span>
+</h1>
+
+<p>
+Satellite images can be compared across years to observe
+changes in glaciers, snow cover and polar ice.
+</p>
+
+</div>
+
+<img class="visual" src="https://images.unsplash.com/photo-1517783999520-f068d7431a60?auto=format&fit=crop&w=1600&q=80">
+
+<div class="cards">
+
+<div class="card">
+<h2>Ice Area</h2>
+<div class="data" style="opacity: 1;">TRACKING</div>
+</div>
+
+<div class="card">
+<h2>Glacier Movement</h2>
+<div class="data">ANALYZING</div>
+</div>
+
+<div class="card">
+<h2>Satellite Images</h2>
+<div class="data">UPDATED</div>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 8 — DEFORESTATION
+===================================================== -->
+
+<section class="page">
+
+<div class="page-title">
+
+<div class="tag">07 / FOREST MONITORING</div>
+
+<h1>
+DEFORESTATION<br>
+<span>TRACKER</span>
+</h1>
+
+<p>
+Remote sensing technology can help detect changes in
+forest cover and vegetation.
+</p>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+<div class="card-icon">🌳</div>
+<h2>Forest Cover</h2>
+<div class="data">MONITOR</div>
+</div>
+
+<div class="card">
+<div class="card-icon">🛰️</div>
+<h2>Satellite Imaging</h2>
+<div class="data">ACTIVE</div>
+</div>
+
+<div class="card">
+<div class="card-icon">🌱</div>
+<h2>Vegetation</h2>
+<div class="data">ANALYSIS</div>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 9 — WILDFIRE
+===================================================== -->
+
+<section class="page">
+
+<div class="page-title">
+
+<div class="tag">08 / FIRE MONITORING</div>
+
+<h1>
+WILDFIRE<br>
+<span>TRACKING SYSTEM</span>
+</h1>
+
+<p>
+Earth-observing satellites can help identify thermal
+anomalies and active fire locations.
+</p>
+
+</div>
+
+
+<div class="map">
+
+<div class="pin pin1"></div>
+<div class="pin pin2"></div>
+<div class="pin pin3"></div>
+<div class="pin pin4"></div>
+<div class="pin pin5"></div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 10 — EXTREME WEATHER
+===================================================== -->
+
+<section class="page">
+
+<div class="page-title">
+
+<div class="tag">09 / WEATHER MONITORING</div>
+
+<h1>
+EXTREME WEATHER<br>
+<span>TRACKER</span>
+</h1>
+
+<p>
+Digital monitoring systems can collect information about
+heatwaves, storms, floods, rainfall and other extreme events.
+</p>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+<div class="card-icon">☀️</div>
+<h2>Heatwaves</h2>
+<div class="data" style="opacity: 1;">TRACK</div>
+</div>
+
+<div class="card">
+<div class="card-icon">🌧️</div>
+<h2>Rainfall</h2>
+<div class="data">MONITOR</div>
+</div>
+
+<div class="card">
+<div class="card-icon">🌪️</div>
+<h2>Storms</h2>
+<div class="data">ALERT</div>
+</div>
+
+<div class="card">
+<div class="card-icon">🌊</div>
+<h2>Flood Risk</h2>
+<div class="data">ANALYZE</div>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 11 — SATELLITES
+===================================================== -->
+
+<section class="page" id="satellite">
+
+<div class="page-title">
+
+<div class="tag">10 / SPACE TECHNOLOGY</div>
+
+<h1>
+SATELLITE<br>
+<span>MONITORING</span>
+</h1>
+
+<p>
+Satellites provide a global view of Earth's atmosphere,
+land, oceans, ice and vegetation.
+</p>
+
+</div>
+
+
+<img class="visual" src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1600&q=80">
+
+<div class="cards">
+
+<div class="card">
+<h2>Earth Observation</h2>
+<p>Collect environmental information from space.</p>
+</div>
+
+<div class="card">
+<h2>Remote Sensing</h2>
+<p>Detect changes on Earth's surface.</p>
+</div>
+
+<div class="card">
+<h2>Image Analysis</h2>
+<p>Compare environmental conditions over time.</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 12 — IOT SENSORS
+===================================================== -->
+
+<section class="page">
+
+<div class="page-title">
+
+<div class="tag">11 / CONNECTED ENVIRONMENT</div>
+
+<h1>
+IoT<br>
+<span>CLIMATE SENSORS</span>
+</h1>
+
+<p>
+Internet-connected sensors can continuously collect local
+environmental measurements and send them to digital systems.
+</p>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+<h2>Temperature Sensor</h2>
+<div class="data">ONLINE</div>
+<span class="status">● DATA STREAM ACTIVE</span>
+</div>
+
+<div class="card">
+<h2>Humidity Sensor</h2>
+<div class="data">ONLINE</div>
+<span class="status">● DATA STREAM ACTIVE</span>
+</div>
+
+<div class="card">
+<h2>Air Sensor</h2>
+<div class="data">ONLINE</div>
+<span class="status">● DATA STREAM ACTIVE</span>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 13 — AI
+===================================================== -->
+
+<section class="page" id="ai">
+
+<div class="page-title">
+
+<div class="tag">12 / ARTIFICIAL INTELLIGENCE</div>
+
+<h1>
+AI CLIMATE<br>
+<span>PREDICTION</span>
+</h1>
+
+<p>
+Artificial intelligence can analyze large environmental
+datasets and identify patterns that may be difficult to
+detect manually.
+</p>
+
+</div>
+
+
+<div class="monitor">
+
+<h2>AI ANALYSIS ENGINE</h2>
+
+<div class="progress">
+<span style="width:89%"></span>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h2>Pattern Detection</h2>
+<div class="data">89%</div>
+</div>
+
+<div class="card">
+<h2>Data Processing</h2>
+<div class="data">HIGH</div>
+</div>
+
+<div class="card">
+<h2>Prediction Model</h2>
+<div class="data">ACTIVE</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 14 — DATA ANALYTICS
+===================================================== -->
+
+<section class="page" id="data">
+
+<div class="page-title">
+
+<div class="tag">13 / CLIMATE DATA</div>
+
+<h1>
+CLIMATE DATA<br>
+<span>ANALYTICS</span>
+</h1>
+
+<p>
+Digital analytics turns raw environmental measurements into
+graphs, indicators and meaningful information.
+</p>
+
+</div>
+
+
+<div class="table-box">
+
+<table>
+
+<tbody><tr>
+<th>Indicator</th>
+<th>Status</th>
+<th>Monitoring</th>
+<th>Digital Tool</th>
+</tr>
+
+<tr>
+<td>Temperature</td>
+<td>Rising</td>
+<td>Active</td>
+<td>Satellites</td>
+</tr>
+
+<tr>
+<td>CO₂</td>
+<td>High</td>
+<td>Active</td>
+<td>Atmospheric Sensors</td>
+</tr>
+
+<tr>
+<td>Sea Level</td>
+<td>Rising</td>
+<td>Active</td>
+<td>Altimetry</td>
+</tr>
+
+<tr>
+<td>Forest Cover</td>
+<td>Changing</td>
+<td>Active</td>
+<td>Remote Sensing</td>
+</tr>
+
+</tbody></table>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 15 — LOCATION TRACKING
+===================================================== -->
+
+<section class="page">
+
+<div class="page-title">
+
+<div class="tag">14 / REGIONAL MONITORING</div>
+
+<h1>
+GLOBAL<br>
+<span>TRACKING MAP</span>
+</h1>
+
+<p>
+Digital maps can display environmental observations from
+different locations and help researchers compare regions.
+</p>
+
+</div>
+
+
+<div class="map">
+
+<div class="pin pin1"></div>
+<div class="pin pin2"></div>
+<div class="pin pin3"></div>
+<div class="pin pin4"></div>
+<div class="pin pin5"></div>
+
+</div>
+
+<div class="buttons">
+
+<a class="btn green" href="#temperature">
+TRACK TEMPERATURE
+</a>
+
+<a class="btn" href="#carbon">
+TRACK CO₂
+</a>
+
+<a class="btn" href="#satellite">
+VIEW SATELLITE DATA
+</a>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 16 — CARBON FOOTPRINT
+===================================================== -->
+
+<section class="page">
+
+<div class="page-title">
+
+<div class="tag">15 / EMISSION MONITORING</div>
+
+<h1>
+CARBON<br>
+<span>FOOTPRINT TRACKER</span>
+</h1>
+
+<p>
+Carbon footprint tracking helps estimate emissions associated
+with activities such as energy use, transport and consumption.
+</p>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+<h2>Energy</h2>
+<div class="data" style="opacity: 1;">TRACK</div>
+<div class="progress">
+<span style="width:65%"></span>
+</div>
+</div>
+
+<div class="card">
+<h2>Transport</h2>
+<div class="data" style="opacity: 1;">TRACK</div>
+<div class="progress">
+<span style="width:48%"></span>
+</div>
+</div>
+
+<div class="card">
+<h2>Consumption</h2>
+<div class="data" style="opacity: 1;">TRACK</div>
+<div class="progress">
+<span style="width:57%"></span>
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 17 — SOLUTIONS
+===================================================== -->
+
+<section class="page" id="solutions">
+
+<div class="page-title">
+
+<div class="tag">16 / CLIMATE ACTION</div>
+
+<h1>
+TRACK.<br>
+<span>ANALYZE.</span><br>
+ACT.
+</h1>
+
+<p>
+Tracking climate information is useful only when the
+information helps people make better environmental decisions.
+</p>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+<div class="card-icon">🌱</div>
+<h2>Plant More Trees</h2>
+<p>
+Increasing vegetation can support ecosystems and carbon
+storage.
+</p>
+</div>
+
+<div class="card">
+<div class="card-icon">☀️</div>
+<h2>Renewable Energy</h2>
+<p>
+Solar and wind technologies can reduce dependence on fossil fuels.
+</p>
+</div>
+
+<div class="card">
+<div class="card-icon">🚲</div>
+<h2>Cleaner Transport</h2>
+<p>
+Public transport, cycling and electric mobility can reduce emissions.
+</p>
+</div>
+
+<div class="card">
+<div class="card-icon">♻️</div>
+<h2>Reduce Waste</h2>
+<p>
+Recycling and responsible consumption can reduce environmental impact.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PAGE 18 — CONCLUSION + TEAM
+===================================================== -->
+
+<section class="page">
+
+<div class="page-title">
+
+<div class="tag">17 / PROJECT CONCLUSION</div>
+
+<h1>
+THE FUTURE OF<br>
+<span>CLIMATE TRACKING</span>
+</h1>
+
+<p>
+Digital technology gives us powerful ways to observe,
+measure and understand the changing climate.
+</p>
+
+</div>
+
+
+<div class="monitor">
+
+<p style="
+color:#b8cacc;
+line-height:2;
+font-size:17px;
+">
+
+Global warming tracking combines environmental science
+with modern digital technologies. Satellites, sensors,
+artificial intelligence, cloud computing and data
+visualization can help transform huge amounts of
+environmental information into useful insights.
+
+<br><br>
+
+The purpose of this project is to show how digital
+technology can support climate monitoring and increase
+awareness about the changes happening around our planet.
+
+</p>
+
+</div>
+
+
+<br><br>
+
+<div class="tag">PROJECT TEAM</div>
+
+<div class="team">
+
+<div class="member">
+
+<div class="avatar">SR</div>
+
+<h2>Suhani Rout</h2>
+
+<p>Project Member</p>
+
+</div>
+
+
+<div class="member">
+
+<div class="avatar">LK</div>
+
+<h2>Lokesh Kumar</h2>
+
+<p>Project Member</p>
+
+</div>
+
+
+<div class="member">
+
+<div class="avatar">RS</div>
+
+<h2>Rakshita Sinha</h2>
+
+<p>Project Member</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FLOATING TRACKING CONTROLS
+===================================================== -->
+
+<div class="side">
+
+<a href="#home" title="Home">⌂</a>
+
+<a href="#dashboard" title="Dashboard">▦</a>
+
+<a href="#temperature" title="Temperature">°</a>
+
+<a href="#carbon" title="CO2">C</a>
+
+<a href="#satellite" title="Satellite">S</a>
+
+<a href="#ai" title="AI">AI</a>
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+<div>
+<b style="color:#68e0a0">
+ECO
+</b>TRACK
+</div>
+
+<div>
+GLOBAL WARMING TRACKING USING DIGITAL TECHNOLOGY
+</div>
+
+<div>
+© 2026
+</div>
+
+</footer>
+
+
+<script>
+
+/* =========================================
+   LIVE DIGITAL COUNTER EFFECT
+========================================= */
+
+let counters = document.querySelectorAll(".data");
+
+setInterval(function(){
+
+    counters.forEach(function(counter){
+
+        if(counter.innerText.includes("TRACK")){
+            counter.style.opacity =
+            counter.style.opacity == "0.5" ? "1" : "0.5";
+        }
+
+    });
+
+},1200);
+
+
+/* =========================================
+   BUTTON PRESS EFFECT
+========================================= */
+
+document.querySelectorAll("a").forEach(function(button){
+
+    button.addEventListener("click",function(){
+
+        this.style.transform="scale(.95)";
+
+        setTimeout(function(){
+            button.style.transform="";
+        },150);
+
+    });
+
+});
+
+
+/* =========================================
+   SIMPLE LIVE STATUS
+========================================= */
+
+setInterval(function(){
+
+    let status =
+    document.querySelector(".online");
+
+    if(status){
+
+        status.innerHTML =
+        status.innerHTML.includes("ONLINE")
+        ? "● SYSTEM MONITORING"
+        : "● SYSTEM ONLINE";
+
+    }
+
+},3000);
+
+</script>
+</body>
+</html>
